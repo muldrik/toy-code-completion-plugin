@@ -4,7 +4,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
 //The kotlin way would be to create an object, however this is required by plugin.xml
-class TxtcFileType private constructor() : LanguageFileType(TxtcLanguage.INSTANCE) {
+object TxtcFileType : LanguageFileType(TxtcLanguage) {
     override fun getName(): String {
         return "Txtc File"
     }
@@ -21,7 +21,7 @@ class TxtcFileType private constructor() : LanguageFileType(TxtcLanguage.INSTANC
         return TxtcIcons.FILE
     }
 
-    companion object {
+    /*companion object {
         val INSTANCE = TxtcFileType()
-    }
+    }*/
 }

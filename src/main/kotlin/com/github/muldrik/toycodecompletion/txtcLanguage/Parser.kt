@@ -58,7 +58,7 @@ class TxtcParserDefinition : ParserDefinition {
 
     companion object {
         private val TXTC_FILE_ELEMENT_TYPE: IFileElementType =
-            object : IFileElementType(TxtcFileType.INSTANCE.language) {
+            object : IFileElementType(TxtcFileType.language) {
                 override
                 fun parseContents(chameleon: ASTNode): ASTNode {
                     val chars: CharSequence = chameleon.chars

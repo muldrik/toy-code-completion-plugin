@@ -11,7 +11,7 @@ import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 open class PsiTxtcFileImpl(viewProvider: FileViewProvider) :
     PsiFileImpl(TxtcTokenTypes.TXTC_TEXT_FILE, TxtcTokenTypes.TXTC_TEXT_FILE, viewProvider),
     PsiFile {
-    private val myFileType: FileType = if (viewProvider.baseLanguage !== TxtcLanguage.INSTANCE) TxtcFileType.INSTANCE else viewProvider.fileType
+    private val myFileType: FileType = if (viewProvider.baseLanguage !== TxtcLanguage) TxtcFileType else viewProvider.fileType
     override fun accept(visitor: PsiElementVisitor) {
         visitor.visitElement(this)
     }

@@ -10,7 +10,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="com.github.muldrik.toycodecompletion.services.MyProjectService"/>
         <fileType name="Txtc File" implementationClass="com.github.muldrik.toycodecompletion.txtcLanguage.TxtcFileType"
-                  fieldName="INSTANCE" language="Txtc" extensions="Txtc"/>
+                  language="Txtc" extensions="Txtc"/>
         <lang.parserDefinition language="Txtc"
                                implementationClass="com.github.muldrik.toycodecompletion.txtcLanguage.TxtcParserDefinition"/>
         <completion.contributor

@@ -89,35 +89,4 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
             }
         }
     }
-
-
 }
-
-/*
-class StringLiteralDictionaryAutoPopupContributorTest : BasePlatformTestCase() {
-    override fun runInDispatchThread(): Boolean {
-        return false
-    }
-
-    @Test
-    fun testAutoPopupCompletions() {
-
-        val tester = CompletionAutoPopupTester(myFixture)
-        tester.runWithAutoPopupEnabled {
-            myFixture.configureByText("test.txtc", "")
-            */
-/*tester.typeWithPauses("ob")
-            println(myFixture.lookupElementStrings)*//*
-
-            for (c in 'a'..'z') {
-                if (c == 'x') continue //No words in the used dictionary start with x
-                tester.typeWithPauses(c.toString())
-                println(myFixture.lookupElementStrings)
-                assertFalse(myFixture.lookupElementStrings.isNullOrEmpty())
-                tester.typeWithPauses(" ")
-            }
-        }
-
-    }
-}
-*/
