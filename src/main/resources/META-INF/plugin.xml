@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.muldrik.toycodecompletion</id>
-    <name>toy-code-completion</name>
+    <name>Toy-Code-Completion</name>
     <vendor>muldrik</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -8,7 +8,6 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.muldrik.toycodecompletion.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.muldrik.toycodecompletion.services.MyProjectService"/>
         <fileType name="Simple File" implementationClass="com.github.muldrik.toycodecompletion.SimpleFileType"
                   fieldName="INSTANCE" language="Simple" extensions="simple"/>
@@ -16,8 +15,6 @@
                 language="any"
                 order="first"
                 implementationClass="com.github.muldrik.toycodecompletion.Contributor"/>
-        <preloadingActivity
-                implementation="com.github.muldrik.toycodecompletion.MyPreloadingActivity"/>
     </extensions>
 
     <applicationListeners>

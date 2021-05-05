@@ -8,13 +8,18 @@ import com.intellij.openapi.util.IconLoader
 
 
 
-object SimpleLanguage : Language("Simple")
+class SimpleLanguage : Language("Simple") {
+    companion object {
+        val INSTANCE = SimpleLanguage()
+    }
+}
+
 
 object SimpleIcons {
     val FILE = IconLoader.getIcon("/icons/ileasile3.png")
 }
 
-class SimpleFileType private constructor() : LanguageFileType(SimpleLanguage) {
+class SimpleFileType private constructor() : LanguageFileType(SimpleLanguage.INSTANCE) {
     override fun getName(): String {
         return "Simple File"
     }

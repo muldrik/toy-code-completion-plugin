@@ -29,9 +29,9 @@ internal class Provider(private val onlyManual: Boolean) :
             return
         }
 
-        // return early when there's not prefix
+        // return early when there's not prefix and completion was not called manually
         var prefix = result.prefixMatcher.prefix
-        if (prefix.isEmpty()) {
+        if (prefix.isEmpty() && parameters.isAutoPopup) {
             return
         }
 
@@ -51,37 +51,17 @@ internal class Provider(private val onlyManual: Boolean) :
         val words = filterByPrefix(prefix.toLowerCase(), 30)
         dictResult.restartCompletionOnAnyPrefixChange()
         val total = words.sumByDouble { it.count.toDouble() }
-        for ((i, entry) in words.withIndex()) {
+        for (entry in words) {
             ProgressManager.checkCanceled()
-            val word = if (prefix.first().isUpperCase()) entry.word.capitalize() else entry.word
-            println(prefix.first().isUpperCase())
+            val word = if (prefix.isNotEmpty() && prefix.first().isUpperCase()) entry.word.capitalize() else entry.word
+            val relevance = (entry.count.toDouble() / total) * 100
             val element = LookupElementBuilder
                 .create(word)
-                .withTypeText(entry.count.toString())
+                .withTypeText(String.format("%.2f", relevance))
             dictResult.addElement(PrioritizedLookupElement
                 .withPriority(element, entry.count.toDouble()/total))
-            /*dictResult.addElement(PrioritizedLookupElement
-                .withExplicitProximity(element, i+1))*/
         }
 
-        /*for (dict in get()) {
-            // limit completions to 20 additional characters max
-            dict.getWords(Character.toLowerCase(firstChar), length, length + 20) { word ->
-                // return early when the user modified the data of our editor
-                ProgressManager.checkCanceled()
-                val element: LookupElementBuilder
-                if (isUppercase) {
-                    element = LookupElementBuilder.create(
-                        word.substring(0, 1).toUpperCase() + word.substring(1)
-                    )
-                } else {
-                    element = LookupElementBuilder.create(word)
-                }
-
-                // finally, add it to the completions
-                dictResult.addElement(element)
-            }
-        }*/
     }
 }
 
