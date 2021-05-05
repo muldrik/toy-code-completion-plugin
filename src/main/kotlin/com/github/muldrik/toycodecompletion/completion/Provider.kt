@@ -1,13 +1,12 @@
-package com.github.muldrik.toycodecompletion
+package com.github.muldrik.toycodecompletion.completion
 
-import com.github.muldrik.toycodecompletion.MyDictionary.filterByPrefix
+import com.github.muldrik.toycodecompletion.completion.MyDictionary.filterByPrefix
 import com.intellij.codeInsight.completion.CompletionParameters
 import com.intellij.codeInsight.completion.CompletionProvider
 import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.codeInsight.completion.PrioritizedLookupElement
 import com.intellij.util.ProcessingContext
 import com.intellij.codeInsight.lookup.LookupElementBuilder
-import com.intellij.codeInsight.lookup.LookupElementWeigher
 
 import com.intellij.openapi.progress.ProgressManager
 

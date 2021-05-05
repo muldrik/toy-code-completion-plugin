@@ -1,13 +1,10 @@
 
-import com.github.muldrik.toycodecompletion.MyDictionary
+import com.github.muldrik.toycodecompletion.completion.MyDictionary
 import com.intellij.codeInsight.editorActions.CompletionAutoPopupHandler
 import com.intellij.testFramework.TestModeFlags
-import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.testFramework.fixtures.CompletionAutoPopupTester
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixture4TestCase
-import junit.framework.TestCase
 import org.junit.Test
-import org.junit.jupiter.api.BeforeAll
 import kotlin.test.assertNotEquals
 
 
@@ -21,17 +18,10 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
         TestModeFlags.set(CompletionAutoPopupHandler.ourTestingAutopopup, true)
     }
 
-    companion object {
-        @BeforeAll
-        @JvmStatic
-        fun enableAutoPopup() {
-            TestModeFlags.set(CompletionAutoPopupHandler.ourTestingAutopopup, true)
-            println("Before all")
-        }
-    }
 
     @Test
     fun `Check loaded dictionary`() {
+
         assertTrue(MyDictionary.filterByPrefix("", 30).isNotEmpty())
         for (c in 'a'..'z') {
             if (c == 'x') continue //No words in the dictionary start with x
@@ -41,12 +31,12 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
 
     @Test
     fun `Autocompletion is disabled for empty strings`() {
-        myFixture.configureByText("test.simple", "")
+        myFixture.configureByText("test.txtc", "")
         assertTrue(
             "expected no autocompletion for an empty file",
             myFixture.lookupElementStrings.isNullOrEmpty()
         )
-        myFixture.configureByText("test.simple", "foo")
+        myFixture.configureByText("test.txtc", "foo")
         myFixture.type(" ")
         assertTrue(
             "expected no autocompletion after whitespace",
@@ -55,12 +45,17 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
     }
 
     @Test
+    fun `Manual invocation on empty string returns the entire dictionary`() {
+        myFixture.configureByText("test.txtc", "")
+        assertTrue(myFixture.completeBasic().isNotEmpty())
+        myFixture.type(" ")
+        assertTrue(myFixture.completeBasic().isNotEmpty())
+    }
+
+    @Test
     fun `Autocompletion for single letters expected non-empty`() {
         val tester = CompletionAutoPopupTester(myFixture)
-        myFixture.configureByText("test.simple", "")
-        tester.typeWithPauses("ob")
-        println(myFixture.lookupElementStrings)
-        tester.typeWithPauses(" ")
+        myFixture.configureByText("test.txtc", "")
         for (c in 'a'..'z') {
             if (c == 'x') continue //No words in the used dictionary start with x
             tester.typeWithPauses(c.toString())
@@ -73,7 +68,7 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
     @Test
     fun `Capitalized words complete the same as lowercase`() {
         val tester = CompletionAutoPopupTester(myFixture)
-        myFixture.configureByText("test.simple", "")
+        myFixture.configureByText("test.txtc", "")
         for (c in 'a'..'z') {
             tester.typeWithPauses("$c")
             val lowercaseResults = myFixture.lookupElementStrings
@@ -109,7 +104,7 @@ class StringLiteralDictionaryAutoPopupContributorTest : BasePlatformTestCase() {
 
         val tester = CompletionAutoPopupTester(myFixture)
         tester.runWithAutoPopupEnabled {
-            myFixture.configureByText("test.simple", "")
+            myFixture.configureByText("test.txtc", "")
             */
 /*tester.typeWithPauses("ob")
             println(myFixture.lookupElementStrings)*//*

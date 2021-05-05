@@ -1,17 +1,6 @@
-package com.github.muldrik.toycodecompletion
+package com.github.muldrik.toycodecompletion.completion
 
-import com.google.common.annotations.VisibleForTesting
-import com.intellij.spellchecker.BundledDictionaryProvider
-import com.intellij.spellchecker.SpellCheckerManager
-import com.intellij.spellchecker.StreamLoader
-import com.intellij.spellchecker.dictionary.Dictionary
-import com.intellij.spellchecker.engine.Transformation
-import com.intellij.util.containers.ContainerUtil
-import java.io.File
-import java.io.FileWriter
 import java.io.InputStream
-import java.net.URI
-import java.net.URL
 
 
 /**

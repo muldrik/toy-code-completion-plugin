@@ -9,12 +9,14 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="com.github.muldrik.toycodecompletion.services.MyProjectService"/>
-        <fileType name="Simple File" implementationClass="com.github.muldrik.toycodecompletion.SimpleFileType"
-                  fieldName="INSTANCE" language="Simple" extensions="simple"/>
+        <fileType name="Txtc File" implementationClass="com.github.muldrik.toycodecompletion.txtcLanguage.TxtcFileType"
+                  fieldName="INSTANCE" language="Txtc" extensions="Txtc"/>
+        <lang.parserDefinition language="Txtc"
+                               implementationClass="com.github.muldrik.toycodecompletion.txtcLanguage.TxtcParserDefinition"/>
         <completion.contributor
-                language="any"
+                language="Txtc"
                 order="first"
-                implementationClass="com.github.muldrik.toycodecompletion.Contributor"/>
+                implementationClass="com.github.muldrik.toycodecompletion.completion.Contributor"/>
     </extensions>
 
     <applicationListeners>
