@@ -1,6 +1,6 @@
-package com.github.muldrik.toycodecompletionplugin.listeners
+package com.github.muldrik.toycodecompletion.listeners
 
-import com.github.muldrik.toycodecompletionplugin.services.MyProjectService
+import com.github.muldrik.toycodecompletion.services.MyProjectService
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener

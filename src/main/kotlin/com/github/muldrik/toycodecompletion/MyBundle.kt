@@ -1,4 +1,4 @@
-package com.github.muldrik.toycodecompletionplugin
+package com.github.muldrik.toycodecompletion
 
 import com.intellij.AbstractBundle
 import org.jetbrains.annotations.NonNls

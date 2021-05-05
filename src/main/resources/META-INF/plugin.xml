@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>com.github.muldrik.toycodecompletionplugin</id>
-    <name>toy-code-completion-plugin</name>
+    <id>com.github.muldrik.toycodecompletion</id>
+    <name>toy-code-completion</name>
     <vendor>muldrik</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -8,12 +8,20 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.muldrik.toycodecompletionplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.muldrik.toycodecompletionplugin.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.github.muldrik.toycodecompletion.services.MyApplicationService"/>
+        <projectService serviceImplementation="com.github.muldrik.toycodecompletion.services.MyProjectService"/>
+        <fileType name="Simple File" implementationClass="com.github.muldrik.toycodecompletion.SimpleFileType"
+                  fieldName="INSTANCE" language="Simple" extensions="simple"/>
+        <completion.contributor
+                language="any"
+                order="first"
+                implementationClass="com.github.muldrik.toycodecompletion.Contributor"/>
+        <preloadingActivity
+                implementation="com.github.muldrik.toycodecompletion.MyPreloadingActivity"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.muldrik.toycodecompletionplugin.listeners.MyProjectManagerListener"
+        <listener class="com.github.muldrik.toycodecompletion.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>
