@@ -3,7 +3,6 @@ package com.github.muldrik.toycodecompletion.txtcLanguage
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-//The kotlin way would be to create an object, however this is required by plugin.xml
 object TxtcFileType : LanguageFileType(TxtcLanguage) {
     override fun getName(): String {
         return "Txtc File"
