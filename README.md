@@ -13,12 +13,7 @@ documentation visit the [Github Page](https://github.com/muldrik/toy-code-comple
 
 ## Installation
 
-- Using IDE built-in plugin system :
-  
-  <del><kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "toy-code-completion-plugin"</kbd> >
-  <kbd>Install Plugin</kbd><del>
-  
-  <b>Not yet available<b>
+
   
 - Manually:
 
