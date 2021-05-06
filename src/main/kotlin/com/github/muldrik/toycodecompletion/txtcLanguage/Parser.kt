@@ -16,18 +16,27 @@ import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
 import com.intellij.psi.util.PsiUtilCore
 
+/*
+{
+    PlainTextParserDefinition
+}
+*/
+
 
 class TxtcParserDefinition : ParserDefinition {
 
     override fun createLexer(project: Project?): Lexer {
+        println("A")
         return EmptyLexer()
     }
 
     override fun createParser(project: Project?): PsiParser {
+        println("AA")
         throw UnsupportedOperationException("Not supported")
     }
 
     override fun getFileNodeType(): IFileElementType {
+        println("AAA")
         return TXTC_FILE_ELEMENT_TYPE
     }
 
@@ -42,7 +51,6 @@ class TxtcParserDefinition : ParserDefinition {
     override fun getStringLiteralElements(): TokenSet {
         return TokenSet.EMPTY
     }
-
 
     override fun createElement(node: ASTNode?): PsiElement {
         return PsiUtilCore.NULL_PSI_ELEMENT
@@ -61,6 +69,7 @@ class TxtcParserDefinition : ParserDefinition {
             object : IFileElementType(TxtcFileType.language) {
                 override
                 fun parseContents(chameleon: ASTNode): ASTNode {
+                    println("AAAAAA")
                     val chars: CharSequence = chameleon.chars
                     return ASTFactory.leaf(TxtcTokenTypes.TXTC_TEXT, chars)
                 }

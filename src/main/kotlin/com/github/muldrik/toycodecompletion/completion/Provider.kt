@@ -22,6 +22,7 @@ internal class Provider(private val onlyManual: Boolean) :
         result: CompletionResultSet
     ) {
 
+
         // return early if we're not supposed to show items
         // in the automatic popup
         if (parameters.isAutoPopup && onlyManual) {
@@ -40,11 +41,16 @@ internal class Provider(private val onlyManual: Boolean) :
         // completing a single word.)
         val dictResult: CompletionResultSet
         val lastSpace = prefix.lastIndexOf(' ')
+        println(prefix)
+        println(lastSpace)
         if (lastSpace >= 0 && lastSpace < prefix.length - 1) {
             prefix = prefix.substring(lastSpace + 1)
             dictResult = result.withPrefixMatcher(prefix)
         } else {
             dictResult = result
+        }
+        if (prefix == "and/or") {
+            println(prefix)
         }
 
         val words = filterByPrefix(prefix.toLowerCase(), 30)
@@ -57,6 +63,10 @@ internal class Provider(private val onlyManual: Boolean) :
             val element = LookupElementBuilder
                 .create(word)
                 .withTypeText(String.format("%.2f", relevance))
+                .withInsertHandler { localContext, _ ->
+                    localContext.document.insertString(localContext.tailOffset, " ")
+                    localContext.editor.caretModel.moveToOffset(localContext.tailOffset + 1)
+                }
             dictResult.addElement(PrioritizedLookupElement
                 .withPriority(element, entry.count.toDouble()/total))
         }

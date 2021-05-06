@@ -4,6 +4,7 @@ import com.intellij.codeInsight.editorActions.CompletionAutoPopupHandler
 import com.intellij.testFramework.TestModeFlags
 import com.intellij.testFramework.fixtures.CompletionAutoPopupTester
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixture4TestCase
+import junit.framework.TestCase
 import org.junit.Test
 import kotlin.test.assertNotEquals
 
@@ -57,7 +58,7 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
         val tester = CompletionAutoPopupTester(myFixture)
         myFixture.configureByText("test.txtc", "")
         for (c in 'a'..'z') {
-            if (c == 'x') continue //No words in the used dictionary start with x
+            if (c == 'x') continue //No words in the used dictionary begin with x
             tester.typeWithPauses(c.toString())
             assertFalse(myFixture.lookupElementStrings.isNullOrEmpty())
             tester.typeWithPauses(" ")
@@ -87,6 +88,25 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
                 assertNotEquals(element, lowercaseWord)
                 assertEquals(element, lowercaseWord.capitalize())
             }
+        }
+    }
+
+    @Test
+    fun `Fully typed word is the first in suggestion list`() {
+        val tester = CompletionAutoPopupTester(myFixture)
+        myFixture.configureByText("test.txtc", "")
+        val entries = MyDictionary.filterByPrefix("", 30)
+        for (entry in entries) {
+            tester.typeWithPauses(entry.word)
+            val completionResults = myFixture.lookupElementStrings
+            println("${entry.word} $completionResults")
+            if (completionResults != null) {
+                assertEquals(entry.word, completionResults.first())
+            }
+            else {
+                assertEquals(myFixture.completeBasic(), null)
+            }
+            tester.typeWithPauses(" ")
         }
     }
 }

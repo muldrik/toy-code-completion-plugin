@@ -19,8 +19,4 @@ object TxtcFileType : LanguageFileType(TxtcLanguage) {
     override fun getIcon(): Icon {
         return TxtcIcons.FILE
     }
-
-    /*companion object {
-        val INSTANCE = TxtcFileType()
-    }*/
 }
