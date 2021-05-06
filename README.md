@@ -27,6 +27,10 @@ documentation visit the [Github Page](https://github.com/muldrik/toy-code-comple
 
 
 
+https://user-images.githubusercontent.com/62476306/117331468-73c11980-ae9f-11eb-8f0a-47fce13eca2a.mp4
+
+
+
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
 
