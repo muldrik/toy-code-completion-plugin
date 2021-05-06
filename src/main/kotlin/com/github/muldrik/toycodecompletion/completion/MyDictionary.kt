@@ -16,12 +16,25 @@ data class WordEntry(val word: String, val count: Long)
  */
 internal object MyDictionary {
 
+    private fun loadDictionary(): List<WordEntry> {
+        val current = Thread.currentThread().contextClassLoader //Load dictionary file
+        var result = listOf<WordEntry>()
+        try {
+            Thread.currentThread().contextClassLoader = this.javaClass.classLoader
+            val path = this.javaClass.getResourceAsStream("/dictionary.txt")
+            result = loadWords(path)
+        } finally {
+            Thread.currentThread().contextClassLoader = current
+        }
+        return result
+    }
 
     /**
      * Contains all word entries. Must be alphabetically sorted on initialization
      */
-    private lateinit var words: MutableList<WordEntry>
-
+    private val words: List<WordEntry> by lazy {
+        loadDictionary()
+    }
 
     /**
      * Load word entries from a dictionary
@@ -29,7 +42,7 @@ internal object MyDictionary {
      * Text file is expected to contain one word, a space and one integer on every line in that order,
      * initial sorting is not required
      */
-    fun loadWords(filename: InputStream) {
+    fun loadWords(filename: InputStream): List<WordEntry> {
         val result = mutableListOf<WordEntry>()
         val file = filename.bufferedReader()
         file.forEachLine {
@@ -37,7 +50,7 @@ internal object MyDictionary {
             result.add(WordEntry(values.first(), values.last().toLong()))
         }
         result.sortBy { it.word }
-        words = result
+        return result
     }
 
     private fun smallerNotPrefix(word: String, prefix: String): Boolean {

@@ -87,7 +87,6 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
         val entries = MyDictionary.getAllWords()
         val randomPoolSize = minOf(300, entries.size)
         val randomPool = entries.shuffled().subList(0, randomPoolSize - 1)
-        println(randomPool)
         for (entry in randomPool) {
             myFixture.type(entry.word)
             val completionResults = myFixture.completeBasic()
