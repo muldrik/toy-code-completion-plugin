@@ -3,15 +3,32 @@ package com.github.muldrik.toycodecompletion.completion
 import java.io.InputStream
 
 
-
+/**
+ * Represents a word entry in a frequency dictionary
+ * @param word - the word itself
+ * @param count - frequency relative to other words (e.g. how many times a word is encountered in all datasets
+ */
 data class WordEntry(val word: String, val count: Long)
 
 
+/**
+ * Stores word entries and provides filtered access to them
+ */
 internal object MyDictionary {
 
 
+    /**
+     * Contains all word entries. Must be alphabetically sorted on initialization
+     */
     private lateinit var words: MutableList<WordEntry>
 
+
+    /**
+     * Load word entries from a dictionary
+     * @param filename - opened InputStream to read text from
+     * Text file is expected to contain one word, a space and one integer on every line in that order,
+     * initial sorting is not required
+     */
     fun loadWords(filename: InputStream) {
         val result = mutableListOf<WordEntry>()
         val file = filename.bufferedReader()
@@ -27,6 +44,10 @@ internal object MyDictionary {
         return (word < prefix && !word.startsWith(prefix))
     }
 
+
+    /**
+     * Find the leftmost index for a WordEntry that begins with the provided prefix
+     */
     private fun leftBound(prefix: String): Int {
         var l = 0
         var r = words.size
@@ -40,6 +61,9 @@ internal object MyDictionary {
         return if (l == 0) l else l + 1
     }
 
+    /**
+     * Find the rightmost index for a WordEntry that begins with the provided prefix
+     */
     private fun rightBound(leftBound: Int, prefix: String): Int {
         var l = leftBound
         var r = words.size
@@ -53,6 +77,10 @@ internal object MyDictionary {
         return l
     }
 
+    /**
+     * Uses binary search to find the subarray containing all words staring with the provided prefix
+     * @return List of all words that begin with the provided prefix. Sorted by descending frequency
+     */
     fun filterByPrefix(prefix: String): List<WordEntry> {
 
         val leftBound = leftBound(prefix)
@@ -67,6 +95,10 @@ internal object MyDictionary {
         return res
     }
 
+    /**
+     * Iterates over all words to find the subarray containing all words staring with the provided prefix
+     * @return List of all words that begin with the provided prefix. Sorted by descending frequency
+     */
     fun dumbFilterByPrefix(prefix: String): List<WordEntry> {
         val res = mutableListOf<WordEntry>()
 
@@ -79,6 +111,9 @@ internal object MyDictionary {
         return res
     }
 
+    /**
+     * @return All loaded word entries. Equivalent to filterByPrefix("")
+     */
     fun getAllWords(): List<WordEntry> {
         return words.sortedByDescending { it.count }
     }

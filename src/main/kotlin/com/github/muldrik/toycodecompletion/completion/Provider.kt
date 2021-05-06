@@ -11,10 +11,11 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.openapi.progress.ProgressManager
 
 
-
-
-
-internal class Provider(private val onlyManual: Boolean) :
+/**
+ * Completion Provider for Txtc language
+ * Mostly sorts words by frequencies, displays them as percentages in completion options
+ */
+internal class Provider :
     CompletionProvider<CompletionParameters>() {
     override fun addCompletions(
         parameters: CompletionParameters,
@@ -22,39 +23,40 @@ internal class Provider(private val onlyManual: Boolean) :
         result: CompletionResultSet
     ) {
 
-
-        // return early if we're not supposed to show items
-        // in the automatic popup
-        if (parameters.isAutoPopup && onlyManual) {
-            return
-        }
-
-        // return early when there's not prefix and completion was not called manually
+        //prefix is set to the current word
         val prefix = result.prefixMatcher.prefix
+
+        //Add nothing for an empty prefix
         if (prefix.isEmpty() && parameters.isAutoPopup) {
             return
         }
 
-        // make sure that our prefix is the last word
-        // (In plain text files, the prefix initially contains the whole
-        // file up to the cursor. We don't want that, as we're only
-        // completing a single word.)
-
+        //Get all word entries with the current prefix, sorted by descending frequency
         val words = filterByPrefix(prefix.toLowerCase())
-        result.restartCompletionOnAnyPrefixChange()
+
+        //Compute total word frequencies to later display relevance
         val total = words.sumByDouble { it.count.toDouble() }
+
+        //Update on every prefix change to update relevance
+        result.restartCompletionOnAnyPrefixChange()
+
+
         for (entry in words) {
             ProgressManager.checkCanceled()
+
+            //If the prefix is capitalized, options also must be
             val word = if (prefix.isNotEmpty() && prefix.first().isUpperCase()) entry.word.capitalize() else entry.word
+
+            //Calculate relevance as the percentage of all words with the same prefix
             val relevance = (entry.count.toDouble() / total) * 100
             val element = LookupElementBuilder
                 .create(word)
-                .withTypeText(String.format("%.2f", relevance))
+                .withTypeText(String.format("%.2f", relevance)) //Display relevance with 2 decimal digits accuracy
                 .withInsertHandler { localContext, _ ->
-                    localContext.document.insertString(localContext.tailOffset, " ")
-                    localContext.editor.caretModel.moveToOffset(localContext.tailOffset + 1)
+                    localContext.document.insertString(localContext.tailOffset, " ") //Paste a space on completion
+                    localContext.editor.caretModel.moveToOffset(localContext.tailOffset + 1) //Move to the space
                 }
-            result.addElement(PrioritizedLookupElement
+            result.addElement(PrioritizedLookupElement //Add an element with a priority based on calculated relevance
                 .withPriority(element, entry.count.toDouble()/total))
         }
 

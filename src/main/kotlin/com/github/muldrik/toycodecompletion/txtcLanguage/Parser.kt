@@ -16,13 +16,10 @@ import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
 import com.intellij.psi.util.PsiUtilCore
 
-/*
-{
-    PlainTextParserDefinition
-}
-*/
 
-
+/**
+ * Plain-text-like parser, always returns the entire document
+ */
 class TxtcParserDefinition : ParserDefinition {
 
     override fun createLexer(project: Project?): Lexer {
