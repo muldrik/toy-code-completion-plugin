@@ -15,12 +15,10 @@ open class PsiTxtcFileImpl(viewProvider: FileViewProvider) :
     PsiFileImpl(TxtcTokenTypes.TXTC_TEXT_FILE, TxtcTokenTypes.TXTC_TEXT_FILE, viewProvider), PsiFile {
     private val myFileType: FileType = if (viewProvider.baseLanguage !== TxtcLanguage) TxtcFileType else viewProvider.fileType
     override fun accept(visitor: PsiElementVisitor) {
-        //println("B")
         visitor.visitElement(this)
     }
 
     override fun toString(): String {
-        //println("BB")
         return "PsiFile(txtc text):$name"
     }
 
@@ -29,7 +27,6 @@ open class PsiTxtcFileImpl(viewProvider: FileViewProvider) :
     }
 
     override fun getReferences(): Array<PsiReference> {
-        //println("BBBB")
         return ReferenceProvidersRegistry.getReferencesFromProviders(this)
     }
 }

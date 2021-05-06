@@ -26,17 +26,14 @@ import com.intellij.psi.util.PsiUtilCore
 class TxtcParserDefinition : ParserDefinition {
 
     override fun createLexer(project: Project?): Lexer {
-        println("A")
         return EmptyLexer()
     }
 
     override fun createParser(project: Project?): PsiParser {
-        println("AA")
         throw UnsupportedOperationException("Not supported")
     }
 
     override fun getFileNodeType(): IFileElementType {
-        println("AAA")
         return TXTC_FILE_ELEMENT_TYPE
     }
 
@@ -69,7 +66,6 @@ class TxtcParserDefinition : ParserDefinition {
             object : IFileElementType(TxtcFileType.language) {
                 override
                 fun parseContents(chameleon: ASTNode): ASTNode {
-                    println("AAAAAA")
                     val chars: CharSequence = chameleon.chars
                     return ASTFactory.leaf(TxtcTokenTypes.TXTC_TEXT, chars)
                 }

@@ -13,8 +13,6 @@
                   language="Txtc" extensions="Txtc"/>
         <lang.parserDefinition language="Txtc"
                                implementationClass="com.github.muldrik.toycodecompletion.txtcLanguage.TxtcParserDefinition"/>
-        <lang.ast.factory language="Txtc"
-                          implementationClass="com.github.muldrik.toycodecompletion.txtcLanguage.TxtcASTFactory"/>
         <completion.contributor
                 language="Txtc"
                 order="first"

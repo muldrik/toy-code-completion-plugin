@@ -1796,7 +1796,6 @@ doubt 75356
 pursue 43595
 overall 62203
 nurse 43524
-long-term 43471
 gene 43463
 package 43448
 weird 43433
@@ -1857,7 +1856,6 @@ bomb 41679
 slip 41664
 regional 41656
 muscle 41650
-False 41580
 creation 41523
 typically 41485
 spending 41483
@@ -1871,7 +1869,6 @@ separate 80592
 noise 41144
 yellow 41133
 aim 58586
-e-mail 41092
 cycle 41088
 signal 57083
 app 41082
@@ -2305,7 +2302,6 @@ aunt 30364
 lost 30362
 prospect 30358
 mood 30344
-mm-hmm 30339
 settlement 30250
 justify 30199
 depth 30176
@@ -2329,7 +2325,6 @@ moreover 29856
 cousin 29840
 ordinary 29816
 evolution 29760
-so-called 29757
 helpful 29707
 competitive 29700
 lovely 29696
@@ -2391,7 +2386,6 @@ electronic 29064
 properly 29063
 bureau 29044
 wolf 29042
-and/or 29029
 classic 45930
 recommendation 28998
 exciting 28990
@@ -2833,7 +2827,6 @@ distant 23251
 preference 23230
 politically 23229
 feedback 23220
-health-care 23216
 italian 23199
 detailed 23161
 buyer 23157
@@ -3124,7 +3117,6 @@ fabric 19948
 civilization 19929
 corruption 19925
 collapse 39596
-ma'am 19916
 greatly 19911
 workshop 19894
 inquiry 19877
@@ -3409,7 +3401,6 @@ aide 17521
 subtle 17521
 rod 17510
 civilian 35005
-t-shirt 17501
 endure 17500
 basket 17488
 strict 17484
@@ -3613,7 +3604,6 @@ modify 16000
 sponsor 28259
 mathematics 15994
 hallway 15988
-african-american 15963
 liability 15952
 crawl 15944
 theoretical 15943
@@ -3683,7 +3673,6 @@ clay 15557
 noon 15551
 elbow 15543
 outstanding 15537
-uh-huh 15532
 unity 15519
 manipulate 15513
 airplane 15512
@@ -3860,7 +3849,6 @@ sheep 14430
 carpet 14417
 cloth 14408
 interior 26644
-full-time 14401
 questionnaire 14392
 departure 14389
 behalf 14387
@@ -4097,7 +4085,6 @@ speculation 13167
 sympathy 13166
 tender 13158
 inappropriate 13156
-o'clock 13146
 sodium 13145
 bang 13122
 challenging 13118
@@ -4118,7 +4105,6 @@ mixed 13032
 vampire 13030
 optimistic 13027
 dessert 13024
-well-being 13022
 northeast 13021
 specialize 13006
 fleet 13005
@@ -4211,7 +4197,6 @@ strive 12596
 chunk 12574
 appreciation 12571
 canvas 12570
-short-term 12550
 proceedings 12549
 magical 12544
 loyal 12539
@@ -4228,7 +4213,6 @@ dutch 12496
 parental 12490
 disabled 12489
 collector 12480
-re-election 12476
 disappointment 12475
 happily 12458
 steep 12454

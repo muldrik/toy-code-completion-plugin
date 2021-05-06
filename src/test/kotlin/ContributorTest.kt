@@ -6,29 +6,20 @@ import com.intellij.testFramework.fixtures.CompletionAutoPopupTester
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixture4TestCase
 import junit.framework.TestCase
 import org.junit.Test
+import kotlin.math.sqrt
 import kotlin.test.assertNotEquals
 
 
 class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
 
-    override fun runInDispatchThread(): Boolean {
+    override fun runInDispatchThread(): Boolean { //Required for autocompletion tests
         return false
     }
 
     init {
-        TestModeFlags.set(CompletionAutoPopupHandler.ourTestingAutopopup, true)
+        TestModeFlags.set(CompletionAutoPopupHandler.ourTestingAutopopup, true) //Required for autocompletion tests
     }
 
-
-    @Test
-    fun `Check loaded dictionary`() {
-
-        assertTrue(MyDictionary.filterByPrefix("", 30).isNotEmpty())
-        for (c in 'a'..'z') {
-            if (c == 'x') continue //No words in the dictionary start with x
-            assertTrue(MyDictionary.filterByPrefix(c.toString(), 30).isNotEmpty())
-        }
-    }
 
     @Test
     fun `Autocompletion is disabled for empty strings`() {
@@ -65,9 +56,8 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
         }
     }
 
-
     @Test
-    fun `Capitalized words complete the same as lowercase`() {
+    fun `Capitalized word suggestions are the same as non-capitalized`() {
         val tester = CompletionAutoPopupTester(myFixture)
         myFixture.configureByText("test.txtc", "")
         for (c in 'a'..'z') {
@@ -93,20 +83,21 @@ class ContributorTest : LightPlatformCodeInsightFixture4TestCase() {
 
     @Test
     fun `Fully typed word is the first in suggestion list`() {
-        val tester = CompletionAutoPopupTester(myFixture)
         myFixture.configureByText("test.txtc", "")
-        val entries = MyDictionary.filterByPrefix("", 30)
-        for (entry in entries) {
-            tester.typeWithPauses(entry.word)
-            val completionResults = myFixture.lookupElementStrings
-            println("${entry.word} $completionResults")
-            if (completionResults != null) {
-                assertEquals(entry.word, completionResults.first())
+        val entries = MyDictionary.getAllWords()
+        val randomPoolSize = minOf(300, entries.size)
+        val randomPool = entries.shuffled().subList(0, randomPoolSize - 1)
+        println(randomPool)
+        for (entry in randomPool) {
+            myFixture.type(entry.word)
+            val completionResults = myFixture.completeBasic()
+            if (completionResults != null) { //If multiple options are availible
+                assertEquals(entry.word, completionResults.first().lookupString)
             }
             else {
-                assertEquals(myFixture.completeBasic(), null)
+                assertEquals(completionResults, null) //null <=> the word was successfully completed
             }
-            tester.typeWithPauses(" ")
+            myFixture.type(" ")
         }
     }
 }
